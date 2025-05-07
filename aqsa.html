@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Odd/Even Generator</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #e0eafc, #cfdef3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .container {
+      background: white;
+      padding: 30px 35px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px black;
+      width: 360px;
+      text-align: center;
+      animation: fadeIn 1s ease-in-out;
+    }
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+    button {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+      color: grey;
+      background:whitesmoke;
+      border-radius: 10px;
+      padding: 15px;
+      white-space: pre-line;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease-in-out;
+    }
+    .result.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Odd / Even Generator</h2>
+    <input type="number" id="start" placeholder="Enter start number">
+    <input type="number" id="end" placeholder="Enter end number">
+    <select id="type">
+      <option value="even">Even</option>
+      <option value="odd">Odd</option>
+    </select>
+    <button onclick="generateNumbers()">Generate</button>
+    <div class="result" id="output">Result will appear here</div>
+  </div>
+
+  <script>
+    function generateNumbers() {
+      const start = parseInt(document.getElementById("start").value);
+      const end = parseInt(document.getElementById("end").value);
+      const type = document.getElementById("type").value;
+      const outputDiv = document.getElementById("output");
+      let result = "";
+
+      if (isNaN(start) || isNaN(end)) {
+        result = " Please enter valid numbers!";
+      } else if (start > end) {
+        result = "Start number must be less than or equal to end number!";
+      } else {
+        result += `${type.toUpperCase()} numbers from ${start} to ${end}:\n\n`;
+        for (let i = start; i <= end; i++) {
+          if (type === "even" && i % 2 === 0) {
+            result += i + " ";
+            console.log(i);
+          } else if (type === "odd" && i % 2 !== 0) {
+            result += i + " ";
+            console.log(i);
+          }
+          }
+          }
+
+      outputDiv.innerText = result;
+      outputDiv.classList.add("show");
+    }
+  </script>
+
+</body>
+</html>
